@@ -209,42 +209,43 @@ def main():
         # Optionnel : Réinitialiser le graphique
         plt.close()  # Ferme la figure pour éviter les affichages multiples
         
-        def Eq_Wage(rW):
-            Eq_Wage = Ndemand(A, K, rW, alpha) - Nsupply(rW, beta, I)
-            return Eq_Wage
+      def Eq_Wage(rW):
+            return Ndemand(A, K, rW, alpha) - Nsupply(rW, beta, I)
 
-        rW_0 = 10                             # Initial value (guess)
-        rW_star = root(Eq_Wage, rW_0)         # Equilibrium: Wage
-        N_star  = Nsupply(rW_star.x, beta, I) # Equilibrium: Labor
+        rW_0 = 10
+        sol = root(Eq_Wage, rW_0)
 
+        w_star = float(sol.x[0])                    # salaire d'équilibre (scalaire)
+        N_star = float(Nsupply(w_star, beta, I))    # emploi d'équilibre (scalaire)
 
-        "============================================================================"
-        "12|PLOT LABOR MARKET EQUILIBRIUM"
-        #AXIS RANGE
-        y_max = rW_star.x*2
-        axis_range = [0, T, 0, 12] # Set the axes range
-
-        # BUILD PLOT
+        # 12|PLOT LABOR MARKET EQUILIBRIUM
         plt.figure(figsize=(8, 8), dpi=dpi)
-        # ADD LABOR DEMAND AND SUPPLY
+
+        # Courbes
         plt.plot(Ns[1:T], rW[1:T], "k", label="Labor supply")
         plt.plot(Nd[1:T], rW[1:T], "k", label="Labor demand")
-        plt.plot(N_star, rW_star.x, 'bo')
-        # ADD LABELS
-        plt.text( 4.5      , 11, "Labor demand")
-        plt.text(20        ,  5, "Labor supply")
-        plt.text(0.2       , rW_star.x+0.3, np.round(rW_star.x, 1))
-        plt.text(N_star+0.3, 0.3          , np.round(N_star, 1))
-        # SETTINGS
+
+        # Point d'équilibre
+        plt.plot(N_star, w_star, "bo")
+
+        # Labels / annotations
+        plt.text(4.5, 11, "Labor demand")
+        plt.text(20, 5, "Labor supply")
+        plt.text(0.2, w_star + 0.3, np.round(w_star, 1))
+        plt.text(N_star + 0.3, 0.3, np.round(N_star, 1))
+
+        # Optionnel: limites d'axes (si tu veux vraiment les fixer)
+        # plt.xlim(0, T)
+        # plt.ylim(0, 12)
+
         plt.xlabel("Heures de travail")
         plt.ylabel("salaire réel")
         plt.title("Équilibre")
-        plt.legend() 
-        # Affichage du graphique dans Streamlit
-        st.pyplot(plt)
-        # Optionnel : Réinitialiser le graphique
-        plt.close()  # Ferme la figure pour éviter les affichages multiples
-        st.subheader("À tester")
+        plt.legend()
+
+        fig = plt.gcf()
+        st.pyplot(fig)
+        plt.close(fig)
         
         st.subheader("Crédits")
         st.write("Nicolas Cachanosky, Metropolitan State University of Denver ; ncachano@msudenver.edu ; http://www.ncachanosky.com")    
