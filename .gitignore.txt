@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Outils / IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Thonny
+.thonny/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS / Windows
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
