@@ -250,6 +250,7 @@ def main():
         st.subheader("Crédits")
         st.write("Nicolas Cachanosky, Metropolitan State University of Denver ; ncachano@msudenver.edu ; http://www.ncachanosky.com")    
         # Page du modèle Lotka-Volterra
+
     elif page == "Modèle Proie-Prédateur":
         st.subheader("Simulation du modèle")
 
