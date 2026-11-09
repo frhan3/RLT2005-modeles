@@ -209,8 +209,8 @@ def main():
         # Optionnel : Réinitialiser le graphique
         plt.close()  # Ferme la figure pour éviter les affichages multiples
         
-      def Eq_Wage(rW):
-            return Ndemand(A, K, rW, alpha) - Nsupply(rW, beta, I)
+    def Eq_Wage(rW):
+        return Ndemand(A, K, rW, alpha) - Nsupply(rW, beta, I)
 
         rW_0 = 10
         sol = root(Eq_Wage, rW_0)
